@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; color: #1f2937; background: #f8fafc; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 8%; background: #1d4ed8; color: white; }
+header h1 { margin: 0; font-size: 1.35rem; } main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+table { width: 100%; border-collapse: collapse; background: white; } th, td { padding: .75rem; border-bottom: 1px solid #e5e7eb; text-align: left; }
+button, a { display: inline-block; border: 0; border-radius: 4px; padding: .5rem .7rem; margin: .1rem; cursor: pointer; color: white; background: #2563eb; text-decoration: none; }
+header a { background: white; color: #1d4ed8; } .perigo { background: #dc2626; } .conquista, .sucesso { color: #15803d; font-weight: bold; } .erro { color: #b91c1c; }
+form { max-width: 450px; display: grid; gap: .5rem; background: white; padding: 1rem; } input { padding: .55rem; border: 1px solid #9ca3af; border-radius: 4px; } small { margin-bottom: .5rem; }
