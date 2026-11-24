@@ -5,3 +5,5 @@ export interface Habito {
   metaDias: number;
   conquistaAlcancada: boolean;
 }
+
+export type HabitoPayload = Pick<Habito, 'descricao' | 'metaDias'>;

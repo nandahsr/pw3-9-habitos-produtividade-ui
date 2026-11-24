@@ -1,0 +1,13 @@
+<div class="pagina">
+  <header class="barra-superior"><div><h1>Desafio de Hábitos e Produtividade</h1><p>{{ editando ? 'Atualize seu hábito.' : 'Cadastre um novo hábito.' }}</p></div><a class="botao botao-voltar" routerLink="/">Voltar</a></header>
+  <main class="conteudo"><section class="painel-formulario">
+    <div class="painel-cabecalho"><h2>{{ editando ? 'Editar Registro' : 'Novo Registro' }}</h2><p>Informe a descrição do hábito e a quantidade de dias da meta.</p></div>
+    <div *ngIf="mensagem" class="mensagem mensagem-erro" role="alert">{{ mensagem }}</div>
+    <div *ngIf="carregando" class="estado-carregando">Carregando dados do hábito...</div>
+    <form *ngIf="!carregando" [formGroup]="formulario" (ngSubmit)="salvar()" novalidate>
+      <div class="campo"><label for="descricao">Descrição</label><input id="descricao" type="text" formControlName="descricao" placeholder="Ex.: Ler 20 páginas" [class.invalido]="formulario.controls.descricao.invalid && formulario.controls.descricao.touched"><small *ngIf="formulario.controls.descricao.invalid && formulario.controls.descricao.touched" class="erro-campo">A descrição é obrigatória.</small></div>
+      <div class="campo"><label for="metaDias">Meta (dias)</label><input id="metaDias" type="number" min="1" formControlName="metaDias" [class.invalido]="formulario.controls.metaDias.invalid && formulario.controls.metaDias.touched"><small *ngIf="formulario.controls.metaDias.invalid && formulario.controls.metaDias.touched" class="erro-campo">Informe uma meta de, no mínimo, 1 dia.</small></div>
+      <div class="acoes-formulario"><button type="submit" class="botao botao-salvar" [disabled]="enviando">{{ enviando ? 'Salvando...' : 'Salvar' }}</button><a class="botao botao-cancelar" routerLink="/">Cancelar/Voltar</a></div>
+    </form>
+  </section></main>
+</div>

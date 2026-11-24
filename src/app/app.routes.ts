@@ -4,6 +4,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 
 export const rotas: Routes = [
   { path: '', component: ListagemComponent },
-  { path: 'habitos/novo', component: FormularioComponent },
-  { path: 'habitos/editar/:id', component: FormularioComponent }
+  { path: 'novo', component: FormularioComponent },
+  { path: 'editar/:id', component: FormularioComponent },
+  { path: '**', redirectTo: '' }
 ];

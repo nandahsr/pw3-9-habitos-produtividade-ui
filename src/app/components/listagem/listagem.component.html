@@ -1,30 +1,12 @@
-<header>
-  <h1>Desafio de Hábitos e Produtividade</h1>
-  <a class="botao" routerLink="/habitos/novo">➕ Novo hábito</a>
-</header>
-<main>
-  @if (sucesso) { <p class="sucesso" role="status">✅ {{ sucesso }}</p> }
-  @if (erro) { <p class="erro" role="alert">❌ Erro: {{ erro }}</p> }
-  <div class="tabela-container">
-    <table>
-      <thead><tr><th>ID</th><th>Descrição</th><th>Dias consecutivos</th><th>Meta</th><th>Status</th><th>Ações</th></tr></thead>
-      <tbody>
-        @for (habito of habitos; track habito.id) {
-          <tr>
-            <td>{{ habito.id }}</td><td>{{ habito.descricao }}</td>
-            <td>{{ habito.diasConsecutivos }}</td><td>{{ habito.metaDias }}</td>
-            <td>
-              @if (habito.conquistaAlcancada) { <span class="badge conquistado">🟢 CONQUISTADO</span> }
-              @else { <span class="badge andamento">🟡 EM ANDAMENTO</span> }
-            </td>
-            <td class="acoes">
-              <button (click)="checkin(habito)">⚡ Check-in</button>
-              <a class="botao" [routerLink]="['/habitos/editar', habito.id]">✏️ Editar</a>
-              <button class="excluir" (click)="excluir(habito)">🗑️ Excluir</button>
-            </td>
-          </tr>
-        } @empty { <tr><td colspan="6">Nenhum hábito cadastrado.</td></tr> }
-      </tbody>
-    </table>
-  </div>
-</main>
+<div class="pagina">
+  <header class="barra-superior"><div><h1>Desafio de Hábitos e Produtividade</h1><p>Acompanhe sua consistência e alcance suas metas.</p></div><a class="botao botao-principal" routerLink="/novo">Novo Registro</a></header>
+  <main class="conteudo">
+    <div *ngIf="mensagem" class="mensagem" [class.mensagem-sucesso]="tipoMensagem === 'sucesso'" [class.mensagem-erro]="tipoMensagem === 'erro'" role="alert">{{ mensagem }}</div>
+    <section class="painel">
+      <div class="painel-cabecalho"><div><h2>Meus hábitos</h2><p>Registre um check-in diário para avançar em sua meta.</p></div></div>
+      <div *ngIf="carregando" class="estado-vazio">Carregando hábitos...</div>
+      <div *ngIf="!carregando && habitos.length === 0" class="estado-vazio">Nenhum hábito cadastrado. Clique em “Novo Registro” para começar.</div>
+      <div *ngIf="!carregando && habitos.length > 0" class="tabela-responsiva"><table><thead><tr><th>ID</th><th>Descrição</th><th>Dias consecutivos</th><th>Meta (dias)</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr *ngFor="let habito of habitos"><td>{{ habito.id }}</td><td>{{ habito.descricao }}</td><td>{{ habito.diasConsecutivos }}</td><td>{{ habito.metaDias }}</td><td><span class="badge" [class.badge-conquistado]="habito.conquistaAlcancada" [class.badge-andamento]="!habito.conquistaAlcancada">{{ habito.conquistaAlcancada ? 'CONQUISTADO' : 'EM ANDAMENTO' }}</span></td><td class="acoes"><button type="button" class="botao botao-checkin" (click)="executarCheckin(habito)">Check-in</button><a class="botao botao-editar" [routerLink]="['/editar', habito.id]">Editar</a><button type="button" class="botao botao-excluir" (click)="excluir(habito)">Excluir</button></td></tr></tbody></table></div>
+    </section>
+  </main>
+</div>
